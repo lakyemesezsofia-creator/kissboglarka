@@ -1,0 +1,14 @@
+# Biztonsági fejlécek (Cloudflare Workers static assets). Ezt a fájlt a public mappába kell tenni.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  Strict-Transport-Security: max-age=15552000
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://www.facebook.com https://web.facebook.com https://www.youtube-nocookie.com https://player.vimeo.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+
+# A workers.dev ideiglenes cím ne kerüljön be a keresőkbe (a saját domain igen)
+https://:version.:subdomain.workers.dev/*
+  X-Robots-Tag: noindex
