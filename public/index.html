@@ -6,6 +6,7 @@
 <script>try{var t=localStorage.getItem("kb-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#FBF8F5" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#3A2A33" media="(prefers-color-scheme: dark)">
 <title>Kiss Boglárka – coach, kommunikációs szakember</title>
@@ -1188,7 +1189,8 @@ route();
       ['input','change','keyup'].forEach(function(ev){f.addEventListener(ev,check)});check()}}
   function submit(e){
     e.preventDefault();var f=e.target,out=$('kbk-out'),v=function(n){return (f.elements[n].value||'').trim()};
-    function err(t){out.innerHTML='<div class="kbk-msg err">'+t+'</div>'}
+    function msg(c,t){out.textContent='';var d=document.createElement('div');d.className='kbk-msg '+c;d.textContent=t;out.appendChild(d)}
+    function err(t){msg('err',t)}
     function bad(n){f.elements[n].style.borderColor='#B0525E';f.elements[n].focus()}
     ['name','email'].forEach(function(n){f.elements[n].style.borderColor=''});
     if(!v('name')){bad('name');return err('A név megadása kötelező.')}
@@ -1202,9 +1204,9 @@ route();
     function fallback(){
       if(/@/.test(CFG.email)){
         window.location.href='mailto:'+CFG.email+'?subject='+encodeURIComponent('Időpontkérés – '+nice(state.sel)+' '+rec.start)+'&body='+encodeURIComponent(txt);
-        out.innerHTML='<div class="kbk-msg info">Megnyílt az e-mail programod a kész üzenettel. Küldd el, hogy a kérés megérkezzen.</div>';
+        msg('info','Megnyílt az e-mail programod a kész üzenettel. Küldd el, hogy a kérés megérkezzen.');
       }else{
-        out.innerHTML='<div class="kbk-msg info">A küldés még nincs beállítva. A kérésed szövege:\n\n'+txt.replace(/</g,'&lt;')+'</div>'}}
+        msg('info','A küldés még nincs beállítva. A kérésed szövege:\n\n'+txt)}}
     if(CFG.endpoint){
       var btn=f.querySelector('.kbk-btn');btn.disabled=true;
       fetch(CFG.endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:v('name'),email:v('email'),phone:v('phone'),message:txt,_subject:'Időpontkérés – '+nice(state.sel)+' '+rec.start})})
