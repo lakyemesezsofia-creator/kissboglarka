@@ -223,6 +223,14 @@ img.fx-img{scale:1.12;translate:0 var(--fx-py,0px);will-change:translate}
 .vgo small{display:block;max-width:26em;font-weight:400;font-size:12.5px;line-height:1.5;opacity:.85}
 .vgo .vgo-b{border:0;cursor:pointer;font:600 15px 'Montserrat',system-ui,sans-serif;display:inline-flex;align-items:center;gap:8px;background:#8E4A68;color:#fff;border-radius:999px;padding:11px 24px;font-weight:600}
 .vgo .vgo-b:focus-visible{outline:3px solid #9A4F6B;outline-offset:3px}.vgo a{text-decoration:underline}
+.vgo{cursor:pointer;overflow:hidden}
+.vgo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.vgo>*:not(img){position:relative;z-index:1}
+.vgo.has-img{justify-content:flex-end;padding:0}
+.vgo.has-img .vgo-b{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:72px;height:72px;padding:0;justify-content:center;font-size:26px;border-radius:50%;box-shadow:0 4px 18px rgba(0,0,0,.35);background:rgba(142,74,104,.92)}
+.vgo.has-img .vgo-b span{display:none}
+.vgo.has-img small{width:100%;max-width:none;box-sizing:border-box;padding:28px 14px 10px;background:linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,0));color:#fff;opacity:1;font-size:11.5px}
+.vgo.has-img small a{color:#fff}
 :root:not([data-theme="light"]) .legal{color:inherit}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .kbk-dep,:root:not([data-theme="light"]) .vgo{background:#4A3843;border-color:#5E4856;color:#F1E8E4}:root:not([data-theme="light"]) .kbk-dep{border-left-color:#D4AF6A}}
 :root[data-theme="dark"] .kbk-dep,:root[data-theme="dark"] .vgo{background:#4A3843;border-color:#5E4856;color:#F1E8E4}
@@ -435,8 +443,38 @@ picture{display:block;line-height:0}
 
 </style>
 <noscript><style>[hidden]{display:block !important}.sticky-cta{display:none !important}</style></noscript>
+<meta name="robots" content="noindex, nofollow">
+<style>
+#kb-soon{display:none}
+html.kb-soon body>*:not(#kb-soon){display:none!important}
+html.kb-soon #kb-soon{display:flex;min-height:100vh;box-sizing:border-box;padding:32px 20px;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;background:#FBF8F5;color:#3A2A33;font-family:'Montserrat',system-ui,sans-serif}
+#kb-soon .s-name{margin:0;font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:clamp(34px,6vw,64px);line-height:1.1}
+#kb-soon .s-role{margin:0;font-size:15px;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+#kb-soon .s-big{margin:14px 0 0;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(30px,5vw,52px);color:#8E4A68}
+#kb-soon .s-txt{margin:0;font-size:17px;line-height:1.7;max-width:30em;opacity:.9}
+#kb-soon a{color:inherit}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) html.kb-soon #kb-soon,html.kb-soon:not([data-theme="light"]) #kb-soon{background:#3A2A33;color:#FBF8F5}html.kb-soon:not([data-theme="light"]) #kb-soon .s-big{color:#E8B0C8}}
+html.kb-soon[data-theme="dark"] #kb-soon{background:#3A2A33;color:#FBF8F5}html.kb-soon[data-theme="dark"] #kb-soon .s-big{color:#E8B0C8}
+</style>
+<script>
+/* HAMAROSAN-OLDAL: ha a SOON értéke true, a látogatók csak a "Hamarosan" feliratot látják.
+   Az előnézethez nyisd meg egyszer: https://kissboglarkacoach.hu/?elo=bogi-elonezet-7391
+   Az éles indításhoz írd át a true-t false-ra (var SOON=false). */
+var SOON=true;
+(function(){try{
+  if(/[?&]elo=bogi-elonezet-7391(&|$)/.test(location.search))localStorage.setItem('kb-preview','1');
+  if(SOON&&localStorage.getItem('kb-preview')!=='1')document.documentElement.classList.add('kb-soon');
+}catch(e){if(SOON)document.documentElement.classList.add('kb-soon')}})();
+</script>
 </head>
 <body>
+<div id="kb-soon" role="main">
+<p class="s-name">Kiss Boglárka</p>
+<p class="s-role">coach · kommunikációs szakember</p>
+<p class="s-big">Hamarosan érkezem.</p>
+<p class="s-txt">A honlapom készül. Addig is írj nekem szívesen: <a href="mailto:kissbogili@gmail.com">kissbogili@gmail.com</a></p>
+</div>
+
 <div style="background:#FBF8F5;color:#3A2A33;font-family:'Montserrat',system-ui,sans-serif;min-height:100vh" class="kc-bg-page kc-c-main">
 <header id="site-header" class="site-header">
 <div class="hdr-in">
@@ -767,6 +805,7 @@ picture{display:block;line-height:0}
 </section>
 <section style="max-width:1240px;margin:0 auto;padding:clamp(16px,3vw,40px) clamp(20px,4vw,56px) clamp(48px,7vw,96px);box-sizing:border-box">
 <div class="vgrid" id="vgrid"></div>
+<p style="margin:28px 0 0;font-size:13px;line-height:1.6;opacity:.8">A videók a Facebook (Meta) lejátszóján keresztül jelennek meg, amely saját sütiket helyezhet el, és megkapja az IP-címedet. Részletek: <a href="#adatkezeles">Adatkezelési tájékoztató</a>.</p>
 </section>
 <script>
 /* ============================================================
@@ -779,6 +818,9 @@ picture{display:block;line-height:0}
    Az első fekvő videó nagyobb, a többi kisebb. Új videóhoz másolj be egy új sort.
    Ha a "link" üres, helyette egy üres kép látszik.
    ============================================================ */
+/* VIDEO_GOMB=false: a videók azonnal betöltődnek, a lejátszó saját előnézeti képével (a Facebook ilyenkor már az oldal megnyitásakor adatot kap).
+   VIDEO_GOMB=true: a videó csak a gombra / előnézeti képre kattintva töltődik be (adatvédelmi szempontból biztonságosabb). */
+var VIDEO_GOMB=false;
 var VIDEOK=[
   {link:"https://www.facebook.com/reel/3262559743939459/", forma:"fekvo", cim:"", leiras:""},
   {link:"https://www.facebook.com/reel/1885075422845067/", forma:"story", cim:"", leiras:""},
@@ -805,9 +847,14 @@ var VIDEOK=[
     if(inf){
       var plat=/facebook|fb\.watch/.test(v.link)?'Facebook (Meta)':/vimeo/.test(v.link)?'Vimeo':'YouTube (Google)';
       var go=document.createElement('div');go.className='vgo';
-      go.innerHTML='<button type="button" class="vgo-b">&#9654; Videó megtekintése</button><small>A gombra kattintva betöltődik a(z) '+plat+' lejátszója, amely saját sütiket helyezhet el, és megkapja az IP-címedet. <a href="#adatkezeles">Adatkezelés</a></small>';
-      go.querySelector('button').addEventListener('click',function(){go.remove();load()});
-      f.appendChild(go);
+      go.innerHTML='<button type="button" class="vgo-b" aria-label="Videó megtekintése">&#9654;<span>&nbsp;Videó megtekintése</span></button><small>A lejátszásra kattintva betöltődik a(z) '+plat+' lejátszója, amely saját sütiket helyezhet el, és megkapja az IP-címedet. <a href="#adatkezeles">Adatkezelés</a></small>';
+      go.addEventListener('click',function(ev){if(ev.target.closest('a'))return;go.remove();load()});
+      /* Előnézeti kép: a public mappába tett video-1.jpg, video-2.jpg... (jpg, jpeg, png, webp). A sorszám a VIDEOK lista sorrendje. */
+      if(VIDEO_GOMB)(function(n){var EX=['jpg','jpeg','png','webp'],k=0,im=new Image();im.alt='';
+        im.onerror=function(){if(k<EX.length)im.src='video-'+n+'.'+EX[k++];else im.remove()};
+        im.onload=function(){go.classList.add('has-img')};
+        go.insertBefore(im,go.firstChild);im.onerror()})(i+1);
+      if(VIDEO_GOMB)f.appendChild(go);else load();
       function load(){
       var ifr=document.createElement('iframe');ifr.src=inf.src;ifr.title=v.cim||'Videó';ifr.loading='lazy';
       ifr.allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen';
@@ -1037,7 +1084,7 @@ var VIDEOK=[
 <h3>Google Fonts</h3>
 <p>Az oldal betűtípusait a Google szervereiről tölti be a böngésződ, ilyenkor az IP-címed a Google-hoz kerül. Jogalap: jogos érdek (GDPR 6. cikk (1) f)).</p>
 <h3>Beágyazott videók (Facebook / Meta, YouTube, Vimeo)</h3>
-<p>A Videók oldalon a videók <b>csak akkor töltődnek be, ha a „Videó megtekintése” gombra kattintasz</b>. A kattintással hozzájárulsz ahhoz, hogy az adott platform (Meta, Google vagy Vimeo) a saját adatkezelési szabályai szerint saját sütiket vagy azonosítókat helyezzen el, és megkapja az IP-címedet és az eszközadataidat. Az adott platform önálló adatkezelő. A YouTube-videókat a bővített adatvédelmi (youtube-nocookie) módban ágyazom be.</p>
+<p>A Videók oldalon a videók az adott platform (Meta, Google vagy Vimeo) lejátszóján keresztül jelennek meg. <b>A lejátszó az oldal megnyitásakor betöltődik</b>, és ilyenkor a platform a saját adatkezelési szabályai szerint saját sütiket vagy azonosítókat helyezhet el, és megkapja az IP-címedet és az eszközadataidat akkor is, ha nem indítod el a videót. Ha ezt nem szeretnéd, kerüld a Videók oldalt, vagy tiltsd le a harmadik féltől származó sütiket a böngésződben. Az adott platform önálló adatkezelő. A YouTube-videókat a bővített adatvédelmi (youtube-nocookie) módban ágyazom be.</p>
 <ul>
 <li>Meta: https://www.facebook.com/privacy/policy</li>
 <li>Google: https://policies.google.com/privacy</li>
